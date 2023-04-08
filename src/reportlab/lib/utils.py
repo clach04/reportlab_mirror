@@ -5,7 +5,12 @@ __version__=''' $Id$ '''
 __doc__='''Gazillions of miscellaneous internal utility functions'''
 
 import os, sys, imp, time, types
-from base64 import decodestring as base64_decodestring, encodestring as base64_encodestring
+try:
+    # required for Python 3.10+
+    from base64 import b64decode as base64_decodestring, b64encode as base64_encodestring
+except ImportError:
+    # older python
+    from base64 import decodestring as base64_decodestring, encodestring as base64_encodestring
 try:
     from cPickle import dumps as pickle_dumps, loads as pickle_loads, dump as pickle_dump, load as pickle_load
 except ImportError:
